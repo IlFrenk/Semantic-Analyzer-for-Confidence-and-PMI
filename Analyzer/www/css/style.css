@@ -1,0 +1,81 @@
+/* Empty. Add your own CSS if you like */
+
+.bar-header {
+    background-color: #387ef5;
+}
+
+.title {
+    text-align: center;
+}
+
+.row_conf {
+    /*margin-top: 50px;*/
+    background-color: #387ef5;
+    text-align: center;
+}
+
+.row_conf1 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_conf2 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_conf3 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_conf4 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+    /*margin-bottom: 50px;*/
+}
+
+.row_pmi {
+    background-color: #387ef5;
+    text-align: center;
+}
+
+.row_pmi1 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_pmi2 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_pmi3 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_pmi4 {
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row_graf_conf {
+    /*margin-top: 50px;*/
+    background-color: #387ef5;
+    text-align: center;
+}
+
+.row_graf_pmi {
+    /*margin-top: 50px;*/
+    background-color: #387ef5;
+    text-align: center;
+}

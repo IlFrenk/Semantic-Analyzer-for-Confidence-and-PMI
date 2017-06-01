@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter" ng-controller="MainCtrl">
+
+    <ion-pane>
+      <ion-header-bar class="bar-positive">
+        <h1 class="title">Analyzer</h1>
+      </ion-header-bar>
+      <ion-content>
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Prima parola" ng-model="inputData.word_1">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Seconda parola" ng-model="inputData.word_2">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Terza parola" ng-model="inputData.word_3">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Motore di ricerca
+            </div>
+            <select ng-model="inputData.engine">
+              <option>Google</option>
+              <option>Bing</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row">
+          <div class="col col-50 col-offset-25"><a class="button button-block icon-left ion-ios-search button-positive" ng-click="cerca()">Cerca</a></div>
+        </div>
+        <div class="row" ng-hide="!resultsReady">
+          <div class="col col-50 col-offset-25"><a class="button button-block button-outline icon-left ion-document-text button-positive"  ng-click="risultati()">Risultati</a></div>
+        </div>
+        <div class="row" ng-hide="!resultsReady">
+          <div class="col col-50 col-offset-25"><a class="button button-block button-outline icon-left ion-network button-positive" ng-click="grafico()">Grafico</a></div>
+        </div>
+          
+        </div>
+      </ion-content>
+    </ion-pane>
+
+    <script id="modal-ris.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="closeModal()" style="margin-right: 16px;">Indietro</a>
+          <h1 class="title">Risultati</h1>
+        </ion-header-bar>
+
+        <ion-content>
+          <div class="container">
+            <div class="row row_conf">
+
+              <div class="col col-100""><h1>Confidence</h1></div>
+            </div>
+            <div class="row row_conf1">
+              <div class="col col-50"">{{ inputData.word_1 }}</div>
+              <div class="col">{{ cur_results.partial_res.prob_1 }}</div>
+            </div>
+
+            <div class="row row_conf2">
+              <div class="col col-50"">{{ inputData.word_2 }}</div>
+              <div class="col">{{ cur_results.partial_res.prob_2 }}</div>
+            </div>
+
+            <div class="row row_conf3">
+              <div class="col col-50"">{{ inputData.word_1 }} e {{ inputData.word_2 }}</div>
+              <div class="col">{{ cur_results.conf_1_2 }}</div>
+            </div>
+
+            <div class="row row_conf4">
+              <div class="col col-50"">{{ inputData.word_1 }} e {{ inputData.word_3 }}</div>
+              <div class="col">{{ cur_results.conf_1_3 }}</div>
+            </div>
+
+            <div class="row row_pmi">
+              <div class="col col-100""><h1>PMI</h1></div>
+            </div>
+            <div class="row row_pmi1">
+              <div class="col col-50"">{{ inputData.word_1 }}</div>
+              <div class="col">{{ cur_results.partial_res.prob_1 }}</div>
+            </div>
+
+            <div class="row row_pmi2">
+              <div class="col col-50"">{{ inputData.word_2 }}</div>
+              <div class="col">{{ cur_results.partial_res.prob_2 }}</div>
+            </div>
+
+            <div class="row row_pmi3">
+              <div class="col col-50"">{{ inputData.word_1 }} e {{ inputData.word_2 }}</div>
+              <div class="col">{{ cur_results.pmi_1_2 }}</div>
+            </div>
+
+            <div class="row row_pmi4">
+              <div class="col col-50"">{{ inputData.word_1 }} e {{ inputData.word_3 }}</div>
+              <div class="col">{{ cur_results.pmi_1_3 }}</div>
+            </div>
+            </div>
+          
+          
+
+          
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+
+
+    <script id="modal-grafico.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="closeModal2()" style="margin-right: 16px;">Indietro</a>
+          <h1 class="title">Grafico</h1>
+        </ion-header-bar>
+
+        <ion-content>
+          <div class="row row_graf_conf">
+              <div class="col col-100""><h2>Grafico confidence</h2></div>
+          </div>
+
+          <canvas id="conf_canvas" width="500" height="600"></canvas>
+
+          <div class="row row_graf_pmi">
+              <div class="col col-100""><h1>Grafico PMI</h1></div>
+          </div>
+
+          <canvas id="pmi_canvas" width="500" height="600"></canvas>
+        </ion-content>
+
+      </ion-modal-view>
+    </script>
+  </body>
+</html>
